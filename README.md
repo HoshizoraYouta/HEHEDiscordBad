@@ -45,6 +45,12 @@ A full-stack Discord-like application built with ASP.NET Core Web API backend an
 - PostgreSQL 14 or higher
 - Visual Studio 2022, VS Code, or Rider (optional)
 
+## Common Issues
+
+- **SSL/HTTPS errors?** See [SSL_SETUP.md](SSL_SETUP.md)
+- **CORS errors?** See [CORS_TROUBLESHOOTING.md](CORS_TROUBLESHOOTING.md)
+- **Quick start?** See [QUICK_START_URLS.md](QUICK_START_URLS.md)
+
 ## Setup Instructions
 
 ### 1. Database Setup

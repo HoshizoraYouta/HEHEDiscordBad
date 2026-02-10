@@ -39,9 +39,16 @@ This will:
 
 ## Summary
 
-| Protocol | Port | URL |
-|----------|------|-----|
-| HTTPS ✅ | 7001 | https://localhost:7001 |
-| HTTP  ⚠️ | 5001 | http://localhost:5001 |
+| Service | Protocol | Port | URL |
+|---------|----------|------|-----|
+| **Backend API** | HTTPS ✅ | 7001 | https://localhost:7001 |
+| Backend API | HTTP  ⚠️ | 5001 | http://localhost:5001 |
+| **Frontend** | HTTPS ✅ | 7287 | https://localhost:7287 |
+| Frontend | HTTP  ⚠️ | 5180 | http://localhost:5180 |
+
+## Common Issues
+
+- **SSL errors?** See [SSL_SETUP.md](SSL_SETUP.md)
+- **CORS errors?** See [CORS_TROUBLESHOOTING.md](CORS_TROUBLESHOOTING.md)
 
 For more details, see [SSL_SETUP.md](SSL_SETUP.md)
