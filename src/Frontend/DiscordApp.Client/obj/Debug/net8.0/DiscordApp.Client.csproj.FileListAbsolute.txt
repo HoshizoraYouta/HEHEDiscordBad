@@ -1069,6 +1069,9 @@
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/compressed/g1ts6gbq2d-{0}-tptq2av103-tptq2av103.gz
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/compressed/ksfcgulku7-{0}-lfu7j35m59-lfu7j35m59.gz
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/compressed/ltgjvw4f30-{0}-oyz0vx2fzb-oyz0vx2fzb.gz
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/compressed/n89yy48kjt-{0}-hyc0d2im8v-hyc0d2im8v.gz
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/compressed/ntts0z5opa-{0}-451ppz6ovv-451ppz6ovv.gz
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/compressed/5sha8pqx3o-{0}-zkx6eezbep-zkx6eezbep.gz
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/staticwebassets.build.json
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/staticwebassets.build.json.cache
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/staticwebassets.development.json
@@ -1079,6 +1082,3 @@
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/refint/DiscordApp.Client.dll
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/DiscordApp.Client.pdb
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/ref/DiscordApp.Client.dll
-/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/compressed/n89yy48kjt-{0}-5cbcja0349-5cbcja0349.gz
-/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/compressed/ntts0z5opa-{0}-d7z7wlrwr9-d7z7wlrwr9.gz
-/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/obj/Debug/net8.0/compressed/5sha8pqx3o-{0}-xqybxzih7g-xqybxzih7g.gz

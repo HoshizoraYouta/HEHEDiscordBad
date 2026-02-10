@@ -1,9 +1,3 @@
-/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.csproj.AssemblyReference.cache
-/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.AssemblyInfoInputs.cache
-/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.AssemblyInfo.cs
-/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.csproj.CoreCompileInputs.cache
-/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.sourcelink.json
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/bin/Debug/net8.0/DiscordApp.Infrastructure.deps.json
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/bin/Debug/net8.0/DiscordApp.Infrastructure.runtimeconfig.json
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/bin/Debug/net8.0/DiscordApp.Infrastructure.dll
@@ -12,6 +6,12 @@
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/bin/Debug/net8.0/DiscordApp.Domain.dll
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/bin/Debug/net8.0/DiscordApp.Application.pdb
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/bin/Debug/net8.0/DiscordApp.Domain.pdb
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.csproj.AssemblyReference.cache
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.AssemblyInfoInputs.cache
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.AssemblyInfo.cs
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.csproj.CoreCompileInputs.cache
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.sourcelink.json
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordA.152F6C2B.Up2Date
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/DiscordApp.Infrastructure.dll
 /home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Infrastructure/obj/Debug/net8.0/refint/DiscordApp.Infrastructure.dll
