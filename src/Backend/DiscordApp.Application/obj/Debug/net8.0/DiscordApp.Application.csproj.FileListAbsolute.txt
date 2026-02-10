@@ -1,0 +1,16 @@
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/bin/Debug/net8.0/DiscordApp.Application.deps.json
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/bin/Debug/net8.0/DiscordApp.Application.dll
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/bin/Debug/net8.0/DiscordApp.Application.pdb
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/bin/Debug/net8.0/DiscordApp.Domain.dll
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/bin/Debug/net8.0/DiscordApp.Domain.pdb
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/DiscordApp.Application.csproj.AssemblyReference.cache
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/DiscordApp.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/DiscordApp.Application.AssemblyInfoInputs.cache
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/DiscordApp.Application.AssemblyInfo.cs
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/DiscordApp.Application.csproj.CoreCompileInputs.cache
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/DiscordApp.Application.sourcelink.json
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/DiscordA.57D650EF.Up2Date
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/DiscordApp.Application.dll
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/refint/DiscordApp.Application.dll
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/DiscordApp.Application.pdb
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Application/obj/Debug/net8.0/ref/DiscordApp.Application.dll
