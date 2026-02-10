@@ -70,12 +70,19 @@ dotnet ef database update --startup-project ../DiscordApp.API/DiscordApp.API.csp
 
 ### 2. Backend Setup
 
-1. Navigate to the API project:
+**Important:** If you encounter SSL/HTTPS errors, see [SSL_SETUP.md](SSL_SETUP.md) for troubleshooting.
+
+1. Trust the development certificate (first time only):
+```bash
+dotnet dev-certs https --trust
+```
+
+2. Navigate to the API project:
 ```bash
 cd src/Backend/DiscordApp.API
 ```
 
-2. Run the backend:
+3. Run the backend:
 ```bash
 dotnet run
 ```
