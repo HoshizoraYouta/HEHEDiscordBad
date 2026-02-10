@@ -92,3 +92,12 @@ public class CreateChannelRequest
     public string? Topic { get; set; }
     public string Type { get; set; } = "Text";
 }
+
+public class VoiceSessionDto
+{
+    public Guid Id { get; set; }
+    public Guid ChannelId { get; set; }
+    public Guid UserId { get; set; }
+    public string Username { get; set; } = string.Empty;
+    public DateTime JoinedAt { get; set; }
+}

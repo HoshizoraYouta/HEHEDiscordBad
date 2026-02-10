@@ -50,6 +50,7 @@ A full-stack Discord-like application built with ASP.NET Core Web API backend an
 - **SSL/HTTPS errors?** See [SSL_SETUP.md](SSL_SETUP.md)
 - **CORS errors?** See [CORS_TROUBLESHOOTING.md](CORS_TROUBLESHOOTING.md)
 - **Quick start?** See [QUICK_START_URLS.md](QUICK_START_URLS.md)
+- **Voice chat?** See [VOICE_CHAT_GUIDE.md](VOICE_CHAT_GUIDE.md)
 
 ## Setup Instructions
 

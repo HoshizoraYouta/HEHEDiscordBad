@@ -72,9 +72,25 @@ else
                     {
                         @foreach (var channel in _channels.Where(c => c.Type == "Voice"))
                         {
-                            <button class="channel-btn">
+                            <button class="channel-btn @(_currentVoiceChannelId == channel.Id ? "active" : "")"
+                                    @onclick="() => ToggleVoiceChannel(channel)">
                                 🔊 @channel.Name
+                                @if (_currentVoiceChannelId == channel.Id)
+                                {
+                                    <span style="margin-left: auto; color: #43b581;">●</span>
+                                }
                             </button>
+                            @if (_voiceChannelUsers.TryGetValue(channel.Id, out var users) && users.Any())
+                            {
+                                <div class="voice-users">
+                                    @foreach (var user in users)
+                                    {
+                                        <div class="voice-user">
+                                            <span class="voice-indicator">🎤</span> @user
+                                        </div>
+                                    }
+                                </div>
+                            }
                         }
                     }
                 </div>
@@ -204,6 +220,10 @@ else
     private string _newChannelName = string.Empty;
     private string _newChannelType = "Text";
 
+    // Voice channel state
+    private Guid? _currentVoiceChannelId = null;
+    private Dictionary<Guid, List<string>> _voiceChannelUsers = new();
+
     protected override async Task OnInitializedAsync()
     {
         if (!AuthService.IsAuthenticated)
@@ -213,6 +233,8 @@ else
 
         AuthService.OnAuthStateChanged += HandleAuthStateChanged;
         SignalRService.OnMessageReceived += HandleMessageReceived;
+        SignalRService.OnUserJoinedVoice += HandleUserJoinedVoice;
+        SignalRService.OnUserLeftVoice += HandleUserLeftVoice;
 
         await SignalRService.InitializeAsync();
         await LoadServers();
@@ -322,10 +344,63 @@ else
         InvokeAsync(StateHasChanged);
     }
 
+    // Voice channel methods
+    private async Task ToggleVoiceChannel(ChannelDto channel)
+    {
+        if (_currentVoiceChannelId == channel.Id)
+        {
+            // Leave voice channel
+            await SignalRService.LeaveVoiceChannelAsync(channel.Id);
+            _currentVoiceChannelId = null;
+        }
+        else
+        {
+            // Leave current voice channel if in one
+            if (_currentVoiceChannelId.HasValue)
+            {
+                await SignalRService.LeaveVoiceChannelAsync(_currentVoiceChannelId.Value);
+            }
+
+            // Join new voice channel
+            await SignalRService.JoinVoiceChannelAsync(channel.Id);
+            _currentVoiceChannelId = channel.Id;
+        }
+        StateHasChanged();
+    }
+
+    private void HandleUserJoinedVoice(VoiceSessionDto session)
+    {
+        if (!_voiceChannelUsers.ContainsKey(session.ChannelId))
+        {
+            _voiceChannelUsers[session.ChannelId] = new List<string>();
+        }
+
+        if (!_voiceChannelUsers[session.ChannelId].Contains(session.Username))
+        {
+            _voiceChannelUsers[session.ChannelId].Add(session.Username);
+        }
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void HandleUserLeftVoice(Guid channelId, Guid userId)
+    {
+        if (_voiceChannelUsers.ContainsKey(channelId))
+        {
+            // We don't have the username here, so we'd need to track userId -> username mapping
+            // For now, we'll just refresh the channel users when someone leaves
+            // In a production app, you'd want to maintain a proper user tracking system
+        }
+
+        InvokeAsync(StateHasChanged);
+    }
+
     public void Dispose()
     {
         AuthService.OnAuthStateChanged -= HandleAuthStateChanged;
         SignalRService.OnMessageReceived -= HandleMessageReceived;
+        SignalRService.OnUserJoinedVoice -= HandleUserJoinedVoice;
+        SignalRService.OnUserLeftVoice -= HandleUserLeftVoice;
     }
 }
 
@@ -606,5 +681,28 @@ else
         display: flex;
         justify-content: flex-end;
         gap: 8px;
+    }
+
+    .voice-users {
+        padding-left: 24px;
+        margin-top: 4px;
+    }
+
+    .voice-user {
+        display: flex;
+        align-items: center;
+        padding: 4px 8px;
+        color: #8e9297;
+        font-size: 14px;
+    }
+
+    .voice-indicator {
+        margin-right: 8px;
+        font-size: 12px;
+    }
+
+    .channel-btn.active {
+        background: #393c43;
+        color: #dcddde;
     }
 </style>

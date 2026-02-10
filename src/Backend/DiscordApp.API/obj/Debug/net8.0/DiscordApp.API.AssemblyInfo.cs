@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DiscordApp.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abe8086388185ee449ae055334b6c586a0cf3c00")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6353906f61306aa25898243017691d197cc6594")]
 [assembly: System.Reflection.AssemblyProductAttribute("DiscordApp.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DiscordApp.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

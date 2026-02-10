@@ -14,6 +14,8 @@ public class SignalRService : IAsyncDisposable
     public event Action<MessageDto>? OnMessageReceived;
     public event Action<DirectMessageDto>? OnDirectMessageReceived;
     public event Action<Guid, Guid, string>? OnUserTyping;
+    public event Action<VoiceSessionDto>? OnUserJoinedVoice;
+    public event Action<Guid, Guid>? OnUserLeftVoice;
 
     public SignalRService(ILocalStorageService localStorage, IConfiguration configuration)
     {
@@ -53,9 +55,29 @@ public class SignalRService : IAsyncDisposable
             OnUserTyping?.Invoke(channelId, userId, username);
         });
 
+        // Initialize Voice Hub
+        _voiceHubConnection = new HubConnectionBuilder()
+            .WithUrl($"{_baseUrl}/hubs/voice", options =>
+            {
+                options.AccessTokenProvider = () => Task.FromResult(token)!;
+            })
+            .WithAutomaticReconnect()
+            .Build();
+
+        _voiceHubConnection.On<VoiceSessionDto>("UserJoinedVoice", session =>
+        {
+            OnUserJoinedVoice?.Invoke(session);
+        });
+
+        _voiceHubConnection.On<Guid, Guid>("UserLeftVoice", (channelId, userId) =>
+        {
+            OnUserLeftVoice?.Invoke(channelId, userId);
+        });
+
         try
         {
             await _chatHubConnection.StartAsync();
+            await _voiceHubConnection.StartAsync();
         }
         catch
         {
@@ -108,6 +130,23 @@ public class SignalRService : IAsyncDisposable
         if (_chatHubConnection?.State == HubConnectionState.Connected)
         {
             await _chatHubConnection.InvokeAsync("TypingInChannel", channelId);
+        }
+    }
+
+    // Voice channel methods
+    public async Task JoinVoiceChannelAsync(Guid channelId)
+    {
+        if (_voiceHubConnection?.State == HubConnectionState.Connected)
+        {
+            await _voiceHubConnection.InvokeAsync("JoinVoiceChannel", channelId);
+        }
+    }
+
+    public async Task LeaveVoiceChannelAsync(Guid channelId)
+    {
+        if (_voiceHubConnection?.State == HubConnectionState.Connected)
+        {
+            await _voiceHubConnection.InvokeAsync("LeaveVoiceChannel", channelId);
         }
     }
 
