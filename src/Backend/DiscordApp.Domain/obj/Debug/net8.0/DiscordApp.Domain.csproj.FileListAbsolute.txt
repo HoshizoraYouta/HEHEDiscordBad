@@ -1,0 +1,12 @@
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/bin/Debug/net8.0/DiscordApp.Domain.deps.json
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/bin/Debug/net8.0/DiscordApp.Domain.dll
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/bin/Debug/net8.0/DiscordApp.Domain.pdb
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/obj/Debug/net8.0/DiscordApp.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/obj/Debug/net8.0/DiscordApp.Domain.AssemblyInfoInputs.cache
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/obj/Debug/net8.0/DiscordApp.Domain.AssemblyInfo.cs
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/obj/Debug/net8.0/DiscordApp.Domain.csproj.CoreCompileInputs.cache
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/obj/Debug/net8.0/DiscordApp.Domain.sourcelink.json
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/obj/Debug/net8.0/DiscordApp.Domain.dll
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/obj/Debug/net8.0/refint/DiscordApp.Domain.dll
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/obj/Debug/net8.0/DiscordApp.Domain.pdb
+/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Backend/DiscordApp.Domain/obj/Debug/net8.0/ref/DiscordApp.Domain.dll

@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Backend/">
+    <Project Path="src/Backend/DiscordApp.API/DiscordApp.API.csproj" />
+    <Project Path="src/Backend/DiscordApp.Application/DiscordApp.Application.csproj" />
+    <Project Path="src/Backend/DiscordApp.Domain/DiscordApp.Domain.csproj" />
+    <Project Path="src/Backend/DiscordApp.Infrastructure/DiscordApp.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Frontend/">
+    <Project Path="src/Frontend/DiscordApp.Client/DiscordApp.Client.csproj" />
+  </Folder>
+</Solution>
