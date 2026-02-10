@@ -30,16 +30,16 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
+[/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
+[/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvV2VhdGhlci5yYXpvcg==
+[/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/Pages/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmVnaXN0ZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/runner/work/HEHEDiscordBad/HEHEDiscordBad/src/Frontend/DiscordApp.Client/_Imports.razor]

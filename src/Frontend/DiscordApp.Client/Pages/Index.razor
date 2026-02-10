@@ -1,0 +1,610 @@
+@page "/"
+@using DiscordApp.Client.Models
+@using DiscordApp.Client.Services
+@inject AuthService AuthService
+@inject ApiService ApiService
+@inject SignalRService SignalRService
+@inject NavigationManager Navigation
+@implements IDisposable
+
+@if (!AuthService.IsAuthenticated)
+{
+    <div class="text-center p-5">
+        <h2>Welcome to Discord Clone</h2>
+        <p>Please <a href="/login">login</a> or <a href="/register">register</a> to continue</p>
+    </div>
+}
+else
+{
+    <div class="app-container">
+        <!-- Server Sidebar -->
+        <div class="server-list">
+            <button class="server-btn create-server" @onclick="ShowCreateServerModal">+</button>
+            @if (_servers != null)
+            {
+                @foreach (var server in _servers)
+                {
+                    <button class="server-btn @(_selectedServer?.Id == server.Id ? "active" : "")" 
+                            @onclick="() => SelectServer(server)">
+                        @if (!string.IsNullOrEmpty(server.IconUrl))
+                        {
+                            <img src="@server.IconUrl" alt="@server.Name" />
+                        }
+                        else
+                        {
+                            <span>@server.Name.Substring(0, Math.Min(2, server.Name.Length)).ToUpper()</span>
+                        }
+                    </button>
+                }
+            }
+        </div>
+
+        <!-- Channel Sidebar -->
+        @if (_selectedServer != null)
+        {
+            <div class="channel-list">
+                <div class="server-name">
+                    <h4>@_selectedServer.Name</h4>
+                </div>
+
+                <div class="channels-section">
+                    <div class="section-header">
+                        <span>TEXT CHANNELS</span>
+                        <button @onclick="ShowCreateChannelModal">+</button>
+                    </div>
+                    @if (_channels != null)
+                    {
+                        @foreach (var channel in _channels.Where(c => c.Type == "Text"))
+                        {
+                            <button class="channel-btn @(_selectedChannel?.Id == channel.Id ? "active" : "")"
+                                    @onclick="() => SelectChannel(channel)">
+                                # @channel.Name
+                            </button>
+                        }
+                    }
+                </div>
+
+                <div class="channels-section">
+                    <div class="section-header">
+                        <span>VOICE CHANNELS</span>
+                    </div>
+                    @if (_channels != null)
+                    {
+                        @foreach (var channel in _channels.Where(c => c.Type == "Voice"))
+                        {
+                            <button class="channel-btn">
+                                🔊 @channel.Name
+                            </button>
+                        }
+                    }
+                </div>
+
+                <div class="user-info">
+                    <span>@AuthService.CurrentUser?.Profile?.Username</span>
+                    <button @onclick="Logout">Logout</button>
+                </div>
+            </div>
+        }
+
+        <!-- Chat Area -->
+        @if (_selectedChannel != null)
+        {
+            <div class="chat-area">
+                <div class="chat-header">
+                    <h5># @_selectedChannel.Name</h5>
+                    @if (!string.IsNullOrEmpty(_selectedChannel.Topic))
+                    {
+                        <span class="channel-topic">@_selectedChannel.Topic</span>
+                    }
+                </div>
+
+                <div class="messages" @ref="_messagesContainer">
+                    @if (_messages != null)
+                    {
+                        @foreach (var message in _messages)
+                        {
+                            <div class="message">
+                                <div class="message-avatar">
+                                    @if (!string.IsNullOrEmpty(message.UserAvatar))
+                                    {
+                                        <img src="@message.UserAvatar" alt="@message.Username" />
+                                    }
+                                    else
+                                    {
+                                        <div class="avatar-placeholder">@message.Username.Substring(0, 1).ToUpper()</div>
+                                    }
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-author">@message.Username</span>
+                                        <span class="message-time">@message.CreatedAt.ToString("HH:mm")</span>
+                                    </div>
+                                    <div class="message-text">@message.Content</div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <div class="message-input">
+                    <input type="text" @bind="_messageContent" @bind:event="oninput" 
+                           @onkeypress="HandleKeyPress"
+                           placeholder="@($"Message #{_selectedChannel.Name}")" />
+                    <button @onclick="SendMessage">Send</button>
+                </div>
+            </div>
+        }
+        else if (_selectedServer != null)
+        {
+            <div class="chat-area">
+                <div class="welcome-message">
+                    <h3>Welcome to @_selectedServer.Name!</h3>
+                    <p>Select a channel to start chatting</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="chat-area">
+                <div class="welcome-message">
+                    <h3>Welcome!</h3>
+                    <p>Select a server to get started</p>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (_showCreateServerModal)
+    {
+        <div class="modal-backdrop" @onclick="CloseModals">
+            <div class="modal-content" @onclick:stopPropagation>
+                <h3>Create Server</h3>
+                <input type="text" @bind="_newServerName" placeholder="Server Name" class="form-control mb-2" />
+                <input type="text" @bind="_newServerDescription" placeholder="Description (optional)" class="form-control mb-3" />
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" @onclick="CloseModals">Cancel</button>
+                    <button class="btn btn-primary" @onclick="CreateServer">Create</button>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (_showCreateChannelModal)
+    {
+        <div class="modal-backdrop" @onclick="CloseModals">
+            <div class="modal-content" @onclick:stopPropagation>
+                <h3>Create Channel</h3>
+                <input type="text" @bind="_newChannelName" placeholder="Channel Name" class="form-control mb-2" />
+                <select @bind="_newChannelType" class="form-control mb-3">
+                    <option value="Text">Text Channel</option>
+                    <option value="Voice">Voice Channel</option>
+                </select>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" @onclick="CloseModals">Cancel</button>
+                    <button class="btn btn-primary" @onclick="CreateChannel">Create</button>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    private List<ServerDto>? _servers;
+    private List<ChannelDto>? _channels;
+    private List<MessageDto>? _messages = new();
+    private ServerDto? _selectedServer;
+    private ChannelDto? _selectedChannel;
+    private string _messageContent = string.Empty;
+    private ElementReference _messagesContainer;
+
+    private bool _showCreateServerModal = false;
+    private bool _showCreateChannelModal = false;
+    private string _newServerName = string.Empty;
+    private string _newServerDescription = string.Empty;
+    private string _newChannelName = string.Empty;
+    private string _newChannelType = "Text";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!AuthService.IsAuthenticated)
+        {
+            return;
+        }
+
+        AuthService.OnAuthStateChanged += HandleAuthStateChanged;
+        SignalRService.OnMessageReceived += HandleMessageReceived;
+
+        await SignalRService.InitializeAsync();
+        await LoadServers();
+    }
+
+    private async Task LoadServers()
+    {
+        _servers = await ApiService.GetServersAsync();
+    }
+
+    private async Task SelectServer(ServerDto server)
+    {
+        _selectedServer = server;
+        _selectedChannel = null;
+        _messages?.Clear();
+        _channels = await ApiService.GetChannelsAsync(server.Id);
+        await SignalRService.JoinServerAsync(server.Id);
+    }
+
+    private async Task SelectChannel(ChannelDto channel)
+    {
+        if (_selectedChannel != null)
+        {
+            await SignalRService.LeaveChannelAsync(_selectedChannel.Id);
+        }
+
+        _selectedChannel = channel;
+        await SignalRService.JoinChannelAsync(channel.Id);
+        await LoadMessages();
+    }
+
+    private async Task LoadMessages()
+    {
+        if (_selectedServer != null && _selectedChannel != null)
+        {
+            _messages = await ApiService.GetChannelMessagesAsync(_selectedServer.Id, _selectedChannel.Id);
+        }
+    }
+
+    private async Task SendMessage()
+    {
+        if (_selectedChannel != null && !string.IsNullOrWhiteSpace(_messageContent))
+        {
+            await SignalRService.SendMessageAsync(_selectedChannel.Id, _messageContent);
+            _messageContent = string.Empty;
+        }
+    }
+
+    private async Task HandleKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey)
+        {
+            await SendMessage();
+        }
+    }
+
+    private void HandleMessageReceived(MessageDto message)
+    {
+        if (_selectedChannel?.Id == message.ChannelId)
+        {
+            _messages?.Add(message);
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void ShowCreateServerModal() => _showCreateServerModal = true;
+    private void ShowCreateChannelModal() => _showCreateChannelModal = true;
+    private void CloseModals()
+    {
+        _showCreateServerModal = false;
+        _showCreateChannelModal = false;
+    }
+
+    private async Task CreateServer()
+    {
+        if (!string.IsNullOrWhiteSpace(_newServerName))
+        {
+            var request = new CreateServerRequest { Name = _newServerName, Description = _newServerDescription };
+            await ApiService.CreateServerAsync(request);
+            await LoadServers();
+            _newServerName = string.Empty;
+            _newServerDescription = string.Empty;
+            CloseModals();
+        }
+    }
+
+    private async Task CreateChannel()
+    {
+        if (_selectedServer != null && !string.IsNullOrWhiteSpace(_newChannelName))
+        {
+            var request = new CreateChannelRequest { Name = _newChannelName, Type = _newChannelType };
+            await ApiService.CreateChannelAsync(_selectedServer.Id, request);
+            _channels = await ApiService.GetChannelsAsync(_selectedServer.Id);
+            _newChannelName = string.Empty;
+            CloseModals();
+        }
+    }
+
+    private async Task Logout()
+    {
+        await AuthService.LogoutAsync();
+        Navigation.NavigateTo("/login");
+    }
+
+    private void HandleAuthStateChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        AuthService.OnAuthStateChanged -= HandleAuthStateChanged;
+        SignalRService.OnMessageReceived -= HandleMessageReceived;
+    }
+}
+
+<style>
+    .app-container {
+        display: flex;
+        height: 100vh;
+    }
+
+    .server-list {
+        width: 72px;
+        background: #202225;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 12px 0;
+        gap: 8px;
+    }
+
+    .server-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: none;
+        background: #36393f;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .server-btn.create-server {
+        background: transparent;
+        border: 2px dashed #555;
+        font-size: 24px;
+    }
+
+    .server-btn:hover, .server-btn.active {
+        border-radius: 16px;
+        background: #5865f2;
+    }
+
+    .server-btn img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .channel-list {
+        width: 240px;
+        background: #2f3136;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .server-name {
+        padding: 16px;
+        border-bottom: 2px solid #202225;
+        color: white;
+    }
+
+    .server-name h4 {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .channels-section {
+        padding: 16px 8px;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #8e9297;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 0 8px;
+        margin-bottom: 4px;
+    }
+
+    .section-header button {
+        background: none;
+        border: none;
+        color: #8e9297;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .channel-btn {
+        width: 100%;
+        text-align: left;
+        padding: 6px 8px;
+        margin: 2px 0;
+        border: none;
+        background: transparent;
+        color: #96989d;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .channel-btn:hover, .channel-btn.active {
+        background: #393c43;
+        color: #dcddde;
+    }
+
+    .user-info {
+        margin-top: auto;
+        padding: 8px;
+        background: #292b2f;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .user-info button {
+        padding: 4px 8px;
+        background: #f23f42;
+        border: none;
+        border-radius: 3px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .chat-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: #36393f;
+    }
+
+    .chat-header {
+        padding: 12px 16px;
+        border-bottom: 1px solid #202225;
+        color: white;
+    }
+
+    .chat-header h5 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .channel-topic {
+        font-size: 14px;
+        color: #8e9297;
+        margin-left: 8px;
+    }
+
+    .messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+    }
+
+    .message {
+        display: flex;
+        padding: 8px 0;
+        color: white;
+    }
+
+    .message:hover {
+        background: #32353b;
+    }
+
+    .message-avatar {
+        width: 40px;
+        height: 40px;
+        margin-right: 16px;
+    }
+
+    .message-avatar img, .avatar-placeholder {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    .avatar-placeholder {
+        background: #5865f2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        color: white;
+    }
+
+    .message-content {
+        flex: 1;
+    }
+
+    .message-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+    }
+
+    .message-author {
+        font-weight: 500;
+        color: white;
+    }
+
+    .message-time {
+        font-size: 12px;
+        color: #72767d;
+    }
+
+    .message-text {
+        color: #dcddde;
+    }
+
+    .message-input {
+        padding: 16px;
+        display: flex;
+        gap: 8px;
+    }
+
+    .message-input input {
+        flex: 1;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        background: #40444b;
+        color: white;
+    }
+
+    .message-input button {
+        padding: 12px 24px;
+        border-radius: 8px;
+        border: none;
+        background: #5865f2;
+        color: white;
+        cursor: pointer;
+    }
+
+    .welcome-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: #8e9297;
+    }
+
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background: #36393f;
+        padding: 24px;
+        border-radius: 8px;
+        min-width: 400px;
+        color: white;
+    }
+
+    .modal-content h3 {
+        margin-top: 0;
+    }
+
+    .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+</style>

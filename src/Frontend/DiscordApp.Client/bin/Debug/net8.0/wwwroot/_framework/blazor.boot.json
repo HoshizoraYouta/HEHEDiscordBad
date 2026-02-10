@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "DiscordApp.Client",
   "resources": {
-    "hash": "sha256-gIgEgkyOPbHBU6+An89fX5VEQQf8I5GWVCvtmCKl1ko=",
+    "hash": "sha256-MUwqkfF4qeSpfarlOnk+cVnLpEtv6JrlYsC9qchROfA=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-NljIbpK/1KCj0+knpX8U77Rbl5kTtfFIuFjK7AuczEw="
     },
@@ -218,14 +218,17 @@
       "mscorlib.wasm": "sha256-oV7k+vcNqj7FS6Y/lMtdhVlq3myDH55/wVxmO4QPrw4=",
       "netstandard.wasm": "sha256-XMXMB0WW//vbNNgQiFAqYo7IJ2C4yQX590aoAbOtTB4=",
       "System.Private.CoreLib.wasm": "sha256-tuhzUgbFn7ji3yhMSxyBLHAps9h0RsFnq+8pUoizHiw=",
-      "DiscordApp.Client.wasm": "sha256-T50iTAolZ4nmBySn0Tz65nlQITixarXayumH4i+uViE="
+      "DiscordApp.Client.wasm": "sha256-Zd+s1NUJG3Bzwb4U43osud5GZtwXE9dpRtasoMUzbec="
     },
     "pdb": {
-      "DiscordApp.Client.pdb": "sha256-oIcqVChddsQK3IuP0j6SXCbN44KhBje1rOGFvoWxhuE="
+      "DiscordApp.Client.pdb": "sha256-+fEWg5IqPmRe05xY/D5pt0raAUWuLqIEo7J0EJc/62c="
     }
   },
   "cacheBootResources": true,
   "debugLevel": -1,
+  "appsettings": [
+    "../appsettings.json"
+  ],
   "globalizationMode": "sharded",
   "extensions": {
     "blazor": {}
